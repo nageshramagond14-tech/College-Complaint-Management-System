@@ -4,7 +4,7 @@ services:
     env: node
     plan: free
     # Build both frontend and backend
-    buildCommand: npm install && cd frontend && npm install && npm run build
+    buildCommand: npm install && cd frontend && npm install --include=dev && npm run build
     # Start the backend (which now serves the frontend)
     startCommand: npm start
     envVars:

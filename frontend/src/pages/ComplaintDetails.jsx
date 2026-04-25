@@ -94,21 +94,46 @@ const ComplaintDetails = () => {
   }
 
   if (error) {
+    const isAccessDenied = error.toLowerCase().includes('permission') || error.toLowerCase().includes('authorized');
+    
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-        <div className="text-center max-w-md">
-          <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">
-            Error Loading Complaint
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4">
+        <div className="max-w-md w-full text-center">
+          <div className="mb-8 relative">
+            <div className="h-32 w-32 bg-red-100 rounded-full mx-auto flex items-center justify-center animate-pulse">
+              <div className="h-24 w-24 bg-red-200 rounded-full flex items-center justify-center">
+                <AlertCircle className="h-12 w-12 text-red-600" />
+              </div>
+            </div>
+            <div className="absolute -bottom-2 right-1/2 translate-x-12 bg-slate-900 text-white px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase shadow-xl">
+              Error 403
+            </div>
+          </div>
+          
+          <h2 className="text-3xl font-serif font-bold text-slate-900 mb-4 tracking-tight">
+            {isAccessDenied ? 'Access Denied' : 'Restricted Content'}
           </h2>
-          <p className="text-gray-600 mb-4">{error}</p>
-          <Link
-            to="/dashboard"
-            className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
-          >
-            <ArrowLeft className="h-5 w-5 mr-2" />
-            Back to Dashboard
-          </Link>
+          
+          <div className="h-1 w-16 bg-red-600 mx-auto mb-6"></div>
+          
+          <p className="text-slate-600 mb-8 leading-relaxed font-medium">
+            {isAccessDenied 
+              ? "This area is restricted to administrative personnel only. Your credentials do not grant access to this sensitive information."
+              : error}
+          </p>
+          
+          <div className="flex flex-col space-y-3">
+            <Link
+              to="/dashboard"
+              className="bg-slate-900 text-white px-8 py-4 rounded-lg font-bold hover:bg-slate-800 transition-all shadow-lg hover:shadow-slate-200 active:scale-95 flex items-center justify-center group"
+            >
+              <ArrowLeft className="h-5 w-5 mr-2 group-hover:-translate-x-1 transition-transform" />
+              Return to Dashboard
+            </Link>
+            <p className="text-xs text-slate-400 mt-6">
+              If you believe this is an error, please contact the system administrator.
+            </p>
+          </div>
         </div>
       </div>
     );

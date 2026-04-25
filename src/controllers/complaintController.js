@@ -117,12 +117,11 @@ class ComplaintController {
 
       const complaint = await ComplaintService.getComplaintById(complaintId);
 
-      // Check if user is authorized to view this complaint
-      if (req.user.role !== 'admin' && req.user.role !== 'department' && 
-          complaint.studentId._id.toString() !== req.user.userId) {
+      // Check authorization (STRICT: ONLY admin allowed)
+      if (req.user.role !== 'admin') {
         return res.status(403).json({
           success: false,
-          message: 'Not authorized to view this complaint'
+          message: 'Access Denied: You do not have permission to view this complaint'
         });
       }
 

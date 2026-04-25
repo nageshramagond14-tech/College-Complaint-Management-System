@@ -1,0 +1,71 @@
+export const dummyComplaints = [
+  {
+    id: '1',
+    title: 'Water Leakage in Hostel Room',
+    description: 'There is a severe water leakage from the ceiling in room 302 of Block A. The water is dripping continuously and has damaged the electrical outlets. This needs immediate attention as it poses a safety risk.',
+    category: 'Hostel',
+    status: 'pending',
+    department: 'Facilities',
+    media: 'https://tse4.mm.bing.net/th/id/OIP.pJM7lpkwNi1h4M2wNxbaVgHaEK?rs=1&pid=ImgDetMain&o=7&rm=3',
+    createdAt: '2026-04-15T10:30:00Z',
+  },
+  {
+    id: '2',
+    title: 'Wi-Fi Not Working in Library',
+    description: 'The Wi-Fi connection in the main library has been down for the past 3 days. Students are unable to access online resources and complete their assignments. The IT department needs to look into this urgently.',
+    category: 'IT',
+    status: 'in-progress',
+    department: 'IT Support',
+    media: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=600&fit=crop',
+    createdAt: '2026-04-14T09:15:00Z',
+  },
+  {
+    id: '3',
+    title: 'Broken Projector in Lecture Hall B',
+    description: 'The projector in Lecture Hall B (Room 205) is not working properly. The display is flickering and the colors are distorted. This is affecting the lectures for the Computer Science department.',
+    category: 'Academic',
+    status: 'resolved',
+    department: 'Academic Affairs',
+    media: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=800&h=600&fit=crop',
+    createdAt: '2026-04-10T14:20:00Z',
+  },
+  {
+    id: '4',
+    title: 'Canteen Food Quality Issue',
+    description: 'The food quality in the main canteen has deteriorated significantly. Multiple students have reported finding insects in the food and the hygiene standards are not being maintained properly.',
+    category: 'Canteen',
+    status: 'pending',
+    department: 'Administration',
+    media: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&h=600&fit=crop',
+    createdAt: '2026-04-18T11:45:00Z',
+  },
+  {
+    id: '5',
+    title: 'Broken Benches in Playground',
+    description: 'Several benches in the sports ground are broken and pose a safety hazard to students. The wooden planks are cracked and the metal frames are rusted. Immediate repair or replacement is needed.',
+    category: 'Infrastructure',
+    status: 'in-progress',
+    department: 'Facilities',
+    media: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&h=600&fit=crop',
+    createdAt: '2026-04-12T16:00:00Z',
+  },
+];
+
+export const categories = [
+  'Hostel',
+  'IT',
+  'Academic',
+  'Canteen',
+  'Infrastructure',
+  'Transport',
+  'Security',
+];
+
+export const departments = [
+  'Facilities',
+  'IT Support',
+  'Academic Affairs',
+  'Administration',
+  'Security',
+  'Transport',
+];

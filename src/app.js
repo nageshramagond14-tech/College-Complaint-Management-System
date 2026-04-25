@@ -85,11 +85,12 @@ app.use('/api/complaints', complaintRoutes);
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 // Handle React routing, return all requests to React app
-app.get('(.*)', (req, res, next) => {
-  // If the request is for an API route that wasn't found, let it pass to the 404 handler
+app.use((req, res, next) => {
+  // If the request is for an API route, let it pass to the 404 handler
   if (req.path.startsWith('/api/')) {
     return next();
   }
+  // For any other route, serve the React app
   res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
 // ----------------------------

@@ -1,40 +1,20 @@
 services:
-  # Backend Service
   - type: web
-    name: college-complaint-backend
+    name: college-complaint-system
     env: node
     plan: free
-    buildCommand: npm install
+    # Build both frontend and backend
+    buildCommand: npm install && cd frontend && npm install && npm run build
+    # Start the backend (which now serves the frontend)
     startCommand: npm start
     envVars:
       - key: NODE_ENV
         value: production
       - key: MONGO_URI
-        sync: false # You will provide this in the Render dashboard
+        sync: false
       - key: JWT_SECRET
         generateValue: true
       - key: JWT_EXPIRE
         value: 7d
-      - key: CORS_ORIGIN
-        fromService:
-          type: static_site
-          name: college-complaint-frontend
-          property: url
-
-  # Frontend Service
-  - type: static_site
-    name: college-complaint-frontend
-    env: static
-    plan: free
-    buildCommand: cd frontend && npm install && npm run build
-    publishPath: frontend/dist
-    envVars:
       - key: VITE_API_BASE_URL
-        fromService:
-          type: web
-          name: college-complaint-backend
-          property: url
-    routes:
-      - type: rewrite
-        src: /*
-        dest: /index.html
+        value: "" # Leave empty so it uses the same domain

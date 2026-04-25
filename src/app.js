@@ -80,21 +80,21 @@ app.get('/health', (req, res) => {
 app.use('/api/users', userRoutes);
 app.use('/api/complaints', complaintRoutes);
 
-// Root endpoint
-app.get('/', (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: 'Complaint Management System API',
-    version: '1.0.0',
-    endpoints: {
-      users: '/api/users',
-      complaints: '/api/complaints',
-      health: '/health'
-    }
-  });
-});
+// --- ADDED FOR DEPLOYMENT ---
+// Serve static files from the React frontend
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
-// 404 handler
+// Handle React routing, return all requests to React app
+app.get('*', (req, res, next) => {
+  // If the request is for an API route that wasn't found, let it pass to the 404 handler
+  if (req.path.startsWith('/api/')) {
+    return next();
+  }
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+});
+// ----------------------------
+
+// 404 handler for API routes
 app.use((req, res) => {
   res.status(404).json({
     success: false,

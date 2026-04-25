@@ -22,7 +22,7 @@ services:
           property: url
 
   # Frontend Service
-  - type: static
+  - type: static_site
     name: college-complaint-frontend
     env: static
     plan: free

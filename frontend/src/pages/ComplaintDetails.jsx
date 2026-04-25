@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Calendar, Building2, Tag, Image, AlertCircle, Trash2, Loader2 } from 'lucide-react';
-import { complaintService } from '../services/complaintService';
+import { complaintService, API_BASE_URL } from '../services/complaintService';
 import StatusBadge from '../components/StatusBadge';
 import Button from '../components/Button';
 
@@ -176,17 +176,15 @@ const ComplaintDetails = () => {
           {/* Media */}
           {complaint.media && (
             <div className="relative h-64 sm:h-80 lg:h-96 overflow-hidden bg-gray-100">
-              {complaint.media.startsWith('http') ? (
-                <img
-                  src={complaint.media}
-                  alt={complaint.title}
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="flex items-center justify-center h-full">
-                  <Image className="h-16 w-16 text-gray-400" />
-                </div>
-              )}
+              <img
+                src={complaint.media.startsWith('http') ? complaint.media : `${API_BASE_URL}/${complaint.media}`}
+                alt={complaint.title}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.style.display = 'none';
+                }}
+              />
             </div>
           )}
 

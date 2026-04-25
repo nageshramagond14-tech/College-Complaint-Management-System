@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Calendar, Building2, Tag } from 'lucide-react';
 import StatusBadge from './StatusBadge';
+import { API_BASE_URL } from '../services/complaintService';
 
 const ComplaintCard = ({ complaint, onStatusChange, onDelete }) => {
   const formattedDate = new Date(complaint.createdAt).toLocaleDateString('en-US', {
@@ -15,10 +16,14 @@ const ComplaintCard = ({ complaint, onStatusChange, onDelete }) => {
       {complaint.media && (
         <div className="relative h-48 overflow-hidden">
           <img
-            src={complaint.media}
+            src={complaint.media.startsWith('http') ? complaint.media : `${API_BASE_URL}/${complaint.media}`}
             alt={complaint.title}
             className="w-full h-full object-cover"
             loading="lazy"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.style.display = 'none';
+            }}
           />
         </div>
       )}

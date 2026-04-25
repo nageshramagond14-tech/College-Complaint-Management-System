@@ -1,6 +1,6 @@
 import { auth } from '../utils/auth';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (window.location.hostname === 'localhost' ? 'http://localhost:5000' : '');
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (window.location.hostname === 'localhost' ? 'http://localhost:5000' : '');
 
 /**
  * Generic API fetch helper
